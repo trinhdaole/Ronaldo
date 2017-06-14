@@ -58,3 +58,16 @@ export function getIndexLastOperator(data) {
     }
     return index;
 }
+
+export function checkDotInNumber(data) {
+    let res = false;
+    let separators = ['\\+', '-', '\\*', '/'];
+    let splitData = data.split(new RegExp(separators.join('|'), 'g'));
+    if(splitData && splitData.length){
+        let num = parseFloat(splitData[splitData.length-1]);
+        if(num % 1 !== 0){
+            res = true;
+        }
+    }
+    return res;
+}

@@ -25,6 +25,9 @@ export default class CalculatorComponent extends Component{
                 displayedData = 0;
             }
             switch (label){
+                case '+/-':
+                case '%':
+                    break;
                 case '<-':
                     if(clickSpecial){
                         break;
@@ -37,6 +40,14 @@ export default class CalculatorComponent extends Component{
                 case '*':
                 case '/':
                     clickSpecial = false;
+                    if(!displayedData || !displayedData.length){
+                        break;
+                    }
+                    if(displayedData && displayedData.length){
+                        if (displayedData.charAt(displayedData.length - 1) === '.'){
+                            break;
+                        }
+                    }
                     if(CalculateFunctions.checkLastIsOperator(displayedData)){
                         displayedData = displayedData.substring(0, displayedData.length - 1) + label;
                     }else {
@@ -72,6 +83,17 @@ export default class CalculatorComponent extends Component{
                         clickSpecial = true;
                     }
                     displayedData = CalculateFunctions.setMR(displayedData, memory);
+                    break;
+                case '.':
+                    if(CalculateFunctions.checkDotInNumber(displayedData)){
+                        break;
+                    }
+                    if(displayedData && displayedData.length){
+                        if(displayedData.charAt(displayedData.length-1) === '.' || CalculateFunctions.checkLastIsOperator(displayedData)){
+                            break;
+                        }
+                    }
+                    displayedData += label;
                     break;
                 default:
                     clickSpecial = false;
