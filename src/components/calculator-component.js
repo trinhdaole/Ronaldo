@@ -59,6 +59,9 @@ export default class CalculatorComponent extends Component{
                         break;
                     }
                     clickSpecial = true;
+                    if(CalculateFunctions.checkLastIsOperator(displayedData)){
+                        displayedData = displayedData.substring(0, displayedData.length - 1);
+                    }
                     displayedData = eval(displayedData);
                     break;
                 case 'C':
@@ -111,7 +114,7 @@ export default class CalculatorComponent extends Component{
     render(){
         let buttonList = [
             'MR', 'MC', 'M+', 'M-', '',
-            '<-', 'C', '+/-', '%', '',
+            '<-', 'C','',
             '7', '8', '9', '/', '',
             '4', '5', '6', '*', '',
             '1', '2', '3', '-', '',
